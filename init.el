@@ -34,6 +34,17 @@
 ;; cider use clojure syntax
 (setq cider-repl-use-clojure-font-lock t)
 
+;; cool function to have cider reload stuff with M-r
+(require 'clojure-mode)
+(defun cider-namespace-refresh ()
+  (interactive)
+  (cider-interactive-eval
+   "(require 'clojure.tools.namespace.repl)
+    (clojure.tools.namespace.repl/refresh)"))
+
+(define-key clojure-mode-map (kbd "M-r") 'cider-namespace-refresh)
+
+
 ;; clojure settings
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'paredit-mode)
